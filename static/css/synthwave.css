@@ -1,0 +1,690 @@
+/* ============================================
+   SYNTHWAVE THEME
+   ============================================ */
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ============================================
+   CSS VARIABLES - SYNTHWAVE PALETTE
+   ============================================ */
+:root {
+  /* Primary Colors - Darker, more black */
+  --synth-bg-dark: #000000;
+  --synth-bg-mid: #050008;
+  --synth-bg-light: #0a0012;
+
+  /* Neon Colors - Purple accents with better visibility */
+  --synth-pink: #a855f7;
+  --synth-pink-glow: #a855f780;
+  --synth-cyan: #c4b5fd;
+  --synth-cyan-glow: #c4b5fd60;
+  --synth-purple: #7c3aed;
+  --synth-purple-glow: #7c3aed80;
+  --synth-orange: #2d0045;
+  --synth-yellow: #ddd6fe;
+
+  /* Sun Gradient - subtle purple */
+  --synth-sun-top: #7c3aed;
+  --synth-sun-bottom: #a855f7;
+
+  /* Text - High visibility */
+  --synth-text: #f5f3ff;
+  --synth-text-muted: #c4b5fd;
+  --synth-text-bright: #ffffff;
+
+  /* Solved Challenge */
+  --synth-solved: #a78bfa;
+  --synth-solved-glow: #a78bfa60;
+
+  /* Fonts */
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Glow Effects - Toned down */
+  --glow-pink: 0 0 8px var(--synth-pink), 0 0 16px var(--synth-pink-glow);
+  --glow-cyan: 0 0 8px var(--synth-cyan), 0 0 16px var(--synth-cyan-glow);
+  --glow-purple: 0 0 8px var(--synth-purple), 0 0 16px var(--synth-purple-glow);
+  --glow-solved: 0 0 8px var(--synth-solved), 0 0 16px var(--synth-solved-glow);
+
+  /* Bootstrap overrides for consistency */
+  --bs-body-bg: transparent;
+  --bs-body-color: var(--synth-text);
+  --bs-link-color: var(--synth-cyan);
+  --bs-link-hover-color: var(--synth-pink);
+}
+
+/* ============================================
+   BASE STYLES & BACKGROUND
+   ============================================ */
+html {
+  background: var(--synth-bg-dark);
+}
+
+body {
+  background: transparent !important;
+  color: var(--synth-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px);
+  z-index: 9999;
+  opacity: 0.05;
+}
+
+/* ============================================
+   LIGHTWEIGHT ANIMATED BACKGROUND (CSS-only)
+   ============================================ */
+
+/* Base background layer - pure black */
+.synth-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: #000000;
+  overflow: hidden;
+}
+
+/* Subtle purple glow at bottom */
+.synth-bg::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 50%;
+  background: radial-gradient(ellipse at center bottom,
+      rgba(124, 58, 237, 0.05) 0%,
+      rgba(88, 28, 180, 0.02) 40%,
+      transparent 70%);
+  animation: glowBreath 8s ease-in-out infinite;
+}
+
+/* Enhanced animated star field */
+.synth-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image:
+    radial-gradient(3px 3px at 5% 10%, rgba(233, 213, 255, 0.95) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 15% 35%, rgba(192, 132, 252, 0.9) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 28% 8%, rgba(216, 180, 254, 0.85) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 42% 55%, rgba(168, 85, 247, 0.9) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 58% 22%, rgba(233, 213, 255, 0.95) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 72% 68%, rgba(192, 132, 252, 0.85) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 88% 15%, rgba(216, 180, 254, 0.9) 1.5px, transparent 0),
+    radial-gradient(3px 3px at 95% 48%, rgba(168, 85, 247, 0.85) 1.5px, transparent 0),
+    radial-gradient(2.5px 2.5px at 8% 45%, rgba(192, 132, 252, 0.85) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 22% 72%, rgba(216, 180, 254, 0.8) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 35% 28%, rgba(168, 85, 247, 0.85) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 48% 85%, rgba(233, 213, 255, 0.8) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 62% 12%, rgba(192, 132, 252, 0.85) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 78% 42%, rgba(216, 180, 254, 0.8) 1px, transparent 0),
+    radial-gradient(2.5px 2.5px at 92% 78%, rgba(168, 85, 247, 0.85) 1px, transparent 0),
+    radial-gradient(2px 2px at 3% 62%, rgba(147, 51, 234, 0.75) 1px, transparent 0),
+    radial-gradient(2px 2px at 18% 18%, rgba(168, 85, 247, 0.7) 1px, transparent 0),
+    radial-gradient(2px 2px at 32% 48%, rgba(126, 34, 206, 0.75) 1px, transparent 0),
+    radial-gradient(2px 2px at 45% 5%, rgba(192, 132, 252, 0.7) 1px, transparent 0),
+    radial-gradient(2px 2px at 55% 75%, rgba(147, 51, 234, 0.75) 1px, transparent 0),
+    radial-gradient(2px 2px at 68% 32%, rgba(168, 85, 247, 0.7) 1px, transparent 0),
+    radial-gradient(2px 2px at 82% 58%, rgba(126, 34, 206, 0.75) 1px, transparent 0),
+    radial-gradient(2px 2px at 98% 25%, rgba(192, 132, 252, 0.7) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 2% 28%, rgba(126, 34, 206, 0.65) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 12% 52%, rgba(107, 33, 168, 0.6) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 25% 88%, rgba(126, 34, 206, 0.65) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 38% 15%, rgba(147, 51, 234, 0.6) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 52% 42%, rgba(107, 33, 168, 0.65) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 65% 95%, rgba(126, 34, 206, 0.6) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 75% 8%, rgba(147, 51, 234, 0.65) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 85% 65%, rgba(107, 33, 168, 0.6) 1px, transparent 0),
+    radial-gradient(1.5px 1.5px at 95% 38%, rgba(126, 34, 206, 0.65) 1px, transparent 0),
+    radial-gradient(1px 1px at 7% 78%, rgba(88, 28, 135, 0.5) 1px, transparent 0),
+    radial-gradient(1px 1px at 20% 32%, rgba(107, 33, 168, 0.45) 1px, transparent 0),
+    radial-gradient(1px 1px at 33% 65%, rgba(88, 28, 135, 0.5) 1px, transparent 0),
+    radial-gradient(1px 1px at 47% 22%, rgba(107, 33, 168, 0.45) 1px, transparent 0),
+    radial-gradient(1px 1px at 58% 88%, rgba(88, 28, 135, 0.5) 1px, transparent 0),
+    radial-gradient(1px 1px at 70% 55%, rgba(107, 33, 168, 0.45) 1px, transparent 0),
+    radial-gradient(1px 1px at 83% 12%, rgba(88, 28, 135, 0.5) 1px, transparent 0),
+    radial-gradient(1px 1px at 93% 72%, rgba(107, 33, 168, 0.45) 1px, transparent 0);
+  background-size: 50% 50%;
+  animation: riseStars 12s linear infinite;
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes glowBreath {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+@keyframes riseStars {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes glowPulse {
+  from {
+    filter: drop-shadow(0 0 10px var(--synth-cyan-glow));
+  }
+
+  to {
+    filter: drop-shadow(0 0 25px var(--synth-pink-glow)) drop-shadow(0 0 40px var(--synth-cyan-glow));
+  }
+}
+
+/* Navbar - Floating Bottom Style */
+nav.navbar {
+  user-select: none;
+  background: linear-gradient(90deg,
+      rgba(13, 2, 33, 0.95),
+      rgba(45, 27, 78, 0.95)) !important;
+  width: fit-content;
+  margin: auto;
+  top: unset;
+  bottom: 16px;
+  padding: 0 32px;
+  border-radius: 12px;
+  border: 1px solid var(--synth-pink);
+  box-shadow: 0 0 16px 0 var(--synth-pink-glow);
+  position: fixed !important;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1030;
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  color: var(--synth-cyan) !important;
+  text-shadow: var(--glow-cyan);
+  margin: auto;
+}
+
+.navbar-brand:hover {
+  color: var(--synth-pink) !important;
+  text-shadow: var(--glow-pink);
+}
+
+.nav-link {
+  color: var(--synth-text) !important;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link:hover {
+  color: var(--synth-pink) !important;
+  text-shadow: var(--glow-pink);
+}
+
+/* Force Dropup for Navbar Menus */
+nav.navbar .dropdown-menu {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-bottom: 8px !important;
+  background: rgba(13, 2, 33, 0.95) !important;
+  border: 1px solid var(--synth-pink) !important;
+  box-shadow: 0 0 16px var(--synth-pink-glow) !important;
+}
+
+/* Jumbotron */
+.jumbotron,
+main .jumbotron {
+  padding: 0;
+  margin: 32px 0;
+  background: transparent !important;
+}
+
+main .jumbotron h1 {
+  font-family: var(--font-display) !important;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--synth-cyan), var(--synth-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px var(--synth-cyan-glow));
+  animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+/* Semi-transparent table rows */
+[data-bs-theme="dark"] tbody tr {
+  background: rgba(5, 2, 12, 0.85) !important;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+}
+
+/*
+   Shifts the challenge board to the left when a challenge modal is open
+*/
+body:has(>div.modal-backdrop.fade.show) div[x-data="ChallengeBoard"] {
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  body:has(>div.modal-backdrop.fade.show) div[x-data="ChallengeBoard"] {
+    transition: none;
+    translate: none;
+    margin: auto;
+  }
+}
+
+/* Highlight the active challenge button when the modal is open */
+body:has(>div.modal-backdrop.fade.show) .challenge-button.active-challenge {
+  border-color: var(--synth-pink) !important;
+  background: rgba(168, 85, 247, 0.2) !important;
+  box-shadow: 0 0 16px var(--synth-pink-glow);
+}
+
+body:has(>div.modal-backdrop.fade.show) .challenge-button.active-challenge.challenge-solved {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+}
+
+/* Score Graph - Floating window */
+#score-graph {
+  background: rgba(5, 2, 12, 0.8) !important;
+  border-radius: 12px;
+  border: 1px solid var(--synth-purple) !important;
+  box-shadow: 0 0 16px 0 var(--synth-purple-glow);
+  position: static !important;
+  padding-top: 14px;
+}
+
+div[x-data="TeamGraphs"] #score-graph {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* Challenge Board structure */
+main>div.container:not(:has(>div[x-data="ChallengeBoard"]))>.row>div {
+  border-radius: 12px;
+  background: rgba(5, 2, 12, 0.8);
+  border: 1px solid var(--synth-purple);
+  box-shadow: 0 0 16px 0 var(--synth-purple-glow);
+  padding: 32px;
+}
+
+div[x-data="ChallengeBoard"] {
+  width: fit-content;
+  border-radius: 12px;
+  background: rgba(5, 2, 12, 0.9);
+  border: 1px solid var(--synth-purple);
+  box-shadow: 0 0 16px 0 var(--synth-purple-glow);
+  margin: 0 auto;
+  /* Center by default */
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  translate: 0 0;
+}
+
+/* Align center when loaded */
+div[x-data="ChallengeBoard"]:not(:has(div[x-show="loaded"]>div)) {
+  opacity: 0.5;
+  translate: 0 -12px;
+  margin: auto;
+}
+
+div[x-data="ChallengeBoard"]>div[x-show="loaded"] {
+  transition: translate 2s cubic-bezier(0, 1, 0, 1);
+  translate: 0 0;
+  padding: 32px;
+
+  /* Internal Scrolling & Navbar Avoidance - Applied to CONTENT, not parent */
+  max-height: calc(100vh - 260px);
+  /* Adjusted for safer clearing of bottom nav */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+div[x-data="ChallengeBoard"]>div[x-show="loaded"]>div.pt-5 {
+  padding-top: 0 !important;
+}
+
+div[x-data="ChallengeBoard"]>div[x-show="loaded"]>div.pt-5:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+/* Challenge List Layout */
+.challenges-row {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.challenges-row>div {
+  margin: 0 !important;
+  min-width: fit-content;
+  width: 800px;
+  /* Wide default */
+  max-width: 90vw;
+  transition: width 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+/* Revert to compact when modal open */
+body:has(>div.modal-backdrop.fade.show) .challenges-row>div {
+  width: 320px;
+}
+
+.challenges-row .challenge-button {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: none;
+}
+
+.challenges-row .challenge-button:hover {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: var(--synth-pink);
+  box-shadow: 0 0 8px var(--synth-pink-glow);
+}
+
+.challenge-inner {
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 !important;
+  padding: 8px 16px;
+}
+
+.challenge-inner p {
+  margin-bottom: 0;
+  font-family: var(--font-body);
+}
+
+/* Challenge Solved State */
+.challenges-row .challenge-button.challenge-solved {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+}
+
+.challenges-row .challenge-button.challenge-solved:hover {
+  background: rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+}
+
+/* Challenge Window (Right side panel) */
+#challenge-window {
+  width: calc(100cqw - 360px - 32px);
+  height: calc(100vh - 260px);
+  position: absolute;
+  left: calc(360px + 32px);
+  border-radius: 12px;
+  background: rgba(8, 4, 16, 0.95);
+  border: 1px solid var(--synth-purple);
+  box-shadow: 0 0 16px 0 var(--synth-purple-glow);
+  box-shadow: 0 0 16px 0 var(--synth-purple-glow);
+  overflow: clip;
+}
+
+#challenge-window[data-solved="true"] {
+  border-color: #10b981 !important;
+  /* Reduced outer glow and inner green vignette */
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.3), inset 0 0 60px rgba(16, 185, 129, 0.15) !important;
+  background: rgba(8, 24, 16, 0.95);
+}
+
+@media (max-width: 991px) {
+  #challenge-window {
+    left: 0;
+    width: calc(100vw - 32px);
+    height: calc(100vh - 32px);
+    margin: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  #challenge-window,
+  #challenge-window .modal-dialog,
+  #challenge-window .modal-content {
+    max-height: calc(100vh - 260px);
+    height: 100%;
+  }
+}
+
+/* Modal inside Challenge Window - remove default modal styles/backdrops */
+body>div.modal-backdrop.fade.show {
+
+  /* Hide backdrop on large screens where we have side-by-side view */
+  @media (width > 991px) {
+    display: none;
+  }
+}
+
+#challenge-window .modal-dialog,
+#challenge-window.modal.show .modal-dialog {
+  transition: translate 2s cubic-bezier(0, 1, 0, 1);
+  translate: 0 0;
+  /* Force Full Width & Height - Override Bootstrap Defaults */
+  transform: none !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#challenge-window .modal-content {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  text-align: left !important;
+  /* Force left alignment */
+}
+
+#challenge-window .modal-body {
+  text-align: left !important;
+}
+
+
+
+/* Modal Content Styling (The Form/Desc) */
+.modal-body {
+  color: var(--synth-text);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--synth-purple);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  color: var(--synth-cyan);
+  text-shadow: 0 0 6px var(--synth-cyan-glow);
+}
+
+/* Input Fields */
+input.form-control,
+select,
+textarea {
+  background: rgba(5, 0, 10, 0.6) !important;
+  border: 1px solid var(--synth-purple) !important;
+  color: var(--synth-text) !important;
+  box-shadow: inset 0 0 4px 0 rgba(124, 58, 237, 0.2);
+}
+
+input.form-control:focus {
+  border-color: var(--synth-cyan) !important;
+  box-shadow: 0 0 8px var(--synth-cyan-glow) !important;
+  color: var(--synth-text-bright) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--synth-purple) !important;
+  border-color: var(--synth-purple) !important;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--synth-pink) !important;
+  border-color: var(--synth-pink) !important;
+  box-shadow: 0 0 10px var(--synth-pink-glow);
+}
+
+.btn-outline-secondary {
+  color: var(--synth-cyan);
+  border-color: var(--synth-cyan);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--synth-cyan);
+  color: black;
+}
+
+/* Container query support for challenge layout */
+main>div.container {
+  container-type: inline-size;
+}
+
+/* Notification styling */
+#challenge .notification-row {
+  width: 100%;
+  z-index: 2000;
+}
+
+#challenge .notification-row .alert {
+  margin-top: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.alert {
+  background: rgba(10, 5, 20, 0.95) !important;
+  border: 1px solid var(--synth-purple);
+  backdrop-filter: blur(4px);
+  color: var(--synth-text);
+}
+
+.alert-success {
+  border-color: var(--synth-solved) !important;
+  color: var(--synth-solved) !important;
+}
+
+.alert-danger {
+  border-color: var(--synth-pink) !important;
+  color: var(--synth-pink) !important;
+}
+
+/* Footer */
+body>footer {
+  display: none;
+}
+
+/* CRT Effects for Modals (Preserved from Synthwave) */
+@keyframes screenFlicker {
+  0% {
+    opacity: 0.9;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#challenge-window .modal-content {
+  animation: screenFlicker 0.2s ease-out;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--synth-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--synth-pink);
+}
+
+/* Corner Logos */
+.corner-logo {
+  position: fixed;
+  top: 16px;
+  z-index: 2000;
+  height: 100px;
+  width: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+}
+
+.logo-left {
+  left: 16px;
+}
+
+.logo-right {
+  right: 16px;
+  top: 0px !important;
+  height: 150px !important;
+  /* 40% larger than base 80px */
+}
+
+@media (max-width: 991px) {
+  .corner-logo {
+    height: 50px;
+    top: 12px;
+  }
+}
