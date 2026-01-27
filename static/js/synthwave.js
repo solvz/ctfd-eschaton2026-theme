@@ -12,7 +12,6 @@
   }
 
   function initPersistentBackground() {
-    // Persistent background animation hack
     try {
       let startTime = sessionStorage.getItem('synthwave_start_time');
       if (!startTime) {
@@ -21,9 +20,6 @@
       }
 
       const elapsed = Date.now() - parseInt(startTime, 10);
-
-      // Calculate negative delays to "fast forward" the animation
-      // glowBreath is approx 8s, riseStars is approx 12s
       const delayGlow = -(elapsed % 8000);
       const delayStars = -(elapsed % 12000);
 
@@ -34,7 +30,7 @@
       `;
       document.head.appendChild(style);
     } catch (e) {
-      console.log('Session storage not available for background persistence');
+      // Session storage not available
     }
   }
 
