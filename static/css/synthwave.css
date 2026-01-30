@@ -471,7 +471,6 @@ div[x-data="ChallengeBoard"]>div[x-show="loaded"]>div.pt-5:not(:last-child) {
 
 .challenges-row>div {
   margin: 0 !important;
-  min-width: fit-content;
   width: 800px;
   max-width: 90vw;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -479,6 +478,7 @@ div[x-data="ChallengeBoard"]>div[x-show="loaded"]>div.pt-5:not(:last-child) {
 
 body:has(>div.modal-backdrop.fade.show) .challenges-row>div {
   width: 320px;
+  max-width: 320px;
 }
 
 .challenges-row .challenge-button {
@@ -524,12 +524,19 @@ body:has(>div.modal-backdrop.fade.show) .challenges-row>div {
   padding: 12px 20px;
   position: relative;
   z-index: 1;
+  gap: 12px;
+  overflow: hidden;
 }
 
 .challenge-inner p {
   margin-bottom: 0;
   font-family: var(--font-body);
   font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 }
 
 .challenge-inner span {
@@ -542,6 +549,7 @@ body:has(>div.modal-backdrop.fade.show) .challenges-row>div {
   background: rgba(168, 85, 247, 0.1);
   border-radius: 20px;
   border: 1px solid rgba(168, 85, 247, 0.3);
+  flex-shrink: 0;
 }
 
 /* Challenge Solved State */
